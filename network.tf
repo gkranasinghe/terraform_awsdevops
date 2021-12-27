@@ -97,27 +97,3 @@ resource "aws_security_group" "ecs-sg" {
     project     = "awsdevops-ps"
   }
 }
-
-resource "aws_lb" "bluegreen-alb" {
-  name               = "bluegreen-alb"
-  internal           = false
-  load_balancer_type = "application"
-  security_groups    = [aws_security_group.ecs-sg.id]
-  subnets            = [aws_subnet.subnet-1a.id,aws_subnet.subnet-1b.id]
-
-  enable_deletion_protection = false
-
-#   access_logs {
-#     bucket  = aws_s3_bucket.lb_logs.bucket
-#     prefix  = "test-lb"
-#     enabled = true
-#   }
-
-  tags = {
-    Owner       = "user"
-    Environment = "staging"
-    Name        = "Main"
-    project     = "awsdevops-ps"
-  }
-}
-
