@@ -12,7 +12,7 @@ resource "aws_s3_bucket" "bucket" {
 
 resource "aws_s3_bucket_object" "object" {
   bucket = "devops-ps-project-bucket"
-  key    = "appspec-file"
+  key    = "appspec.yml"
   source = "${abspath(path.root)}/appspec.yml"
 
   # The filemd5() function is available in Terraform 0.11.12 and later
