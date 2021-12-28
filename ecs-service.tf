@@ -6,9 +6,9 @@ resource "aws_ecs_service" "service-bluegreen" {
   # iam_role        = aws_iam_role.CodeDeployServiceRole.arn
   # depends_on      = [aws_iam_role_policy.foo]
 
-  launch_type        = "FARGATE"
+  launch_type         = "FARGATE"
   scheduling_strategy = "REPLICA"
- deployment_controller {
+  deployment_controller {
     type = "CODE_DEPLOY"
   }
 
@@ -20,11 +20,11 @@ resource "aws_ecs_service" "service-bluegreen" {
   }
   platform_version = "LATEST"
   network_configuration {
-   
-      assign_public_ip = true
-      security_groups = [aws_security_group.ecs-sg.id]
-      subnets        = [aws_subnet.subnet-1a.id, aws_subnet.subnet-1b.id]
-   
+
+    assign_public_ip = true
+    security_groups  = [aws_security_group.ecs-sg.id]
+    subnets          = [aws_subnet.subnet-1a.id, aws_subnet.subnet-1b.id]
+
   }
 
 }
