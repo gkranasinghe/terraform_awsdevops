@@ -22,7 +22,7 @@ resource "aws_ecs_task_definition" "service-td" {
   requires_compatibilities = ["FARGATE"]
   cpu                      = "256"
   memory                   = "512"
-  task_role_arn            = "arn:aws:iam::240202668905:role/CodeDeployServiceRole"
+  task_role_arn            = "arn:aws:iam::240202668905:role/code-deploy-servicerole"
 
 
 }
