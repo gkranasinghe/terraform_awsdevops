@@ -26,3 +26,28 @@ resource "aws_ecs_task_definition" "service-td" {
 
 
 }
+
+
+
+resource "null_resource" "appspec-file" {
+  provisioner "local-exec" {
+    command = <<-EOT
+    cat >appspec.yml <<EOF
+version: 0.0
+Resources:
+  - TargetService:
+      Type: AWS::ECS::Service
+      Properties:
+        TaskDefinition: $TD_ARN
+        LoadBalancerInfo:
+          ContainerName: 'sample-app'
+          ContainerPort: 80
+
+EOF
+  EOT
+
+    environment = {
+       TD_ARN = "${aws_ecs_task_definition.service-td.arn}"
+    }
+  }
+}
