@@ -1,4 +1,9 @@
 resource "aws_ecs_service" "service-bluegreen" {
+
+  # Optional: Allow external changes without Terraform plan difference
+  lifecycle {
+    ignore_changes = [desired_count]
+  }
   name            = "service-bluegreen"
   cluster         = aws_ecs_cluster.bluegreen-cluster.id
   task_definition = aws_ecs_task_definition.service-td.arn
